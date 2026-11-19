@@ -305,22 +305,22 @@ def align(a, b, max_cost):
                 else:                                              # substitution
                     c = SUB_COSTS.get((a[i], b[j]))
                     if c is not None:
-                        relax(i + 1, j + 1, cur, c, 1, i, j, f"{a[i]}->{b[j]}")
+                        relax(i + 1, j + 1, cur, c, 1, i, j, f"{a[i]} vs. {b[j]}")
             if i < n:                                              # deletion
                 ch = a[i]
                 if ch in INDEL_COSTS:
-                    relax(i + 1, j, cur, INDEL_COSTS[ch], 1, i, j, f"{_show(ch)}->(none)")
+                    relax(i + 1, j, cur, INDEL_COSTS[ch], 1, i, j, f"{_show(ch)} vs. (none)")
                 if i > 0 and ch == a[i - 1] and ch not in VOWELS and ch.isalpha():
-                    relax(i + 1, j, cur, DOUBLE_CONSONANT_COST, 1, i, j, f"{ch}{ch}->{ch}")
+                    relax(i + 1, j, cur, DOUBLE_CONSONANT_COST, 1, i, j, f"{ch}{ch} vs. {ch}")
             if j < m:                                              # insertion
                 ch = b[j]
                 if ch in INDEL_COSTS:
-                    relax(i, j + 1, cur, INDEL_COSTS[ch], 1, i, j, f"(none)->{_show(ch)}")
+                    relax(i, j + 1, cur, INDEL_COSTS[ch], 1, i, j, f"(none) vs. {_show(ch)}")
                 if j > 0 and ch == b[j - 1] and ch not in VOWELS and ch.isalpha():
-                    relax(i, j + 1, cur, DOUBLE_CONSONANT_COST, 1, i, j, f"{ch}->{ch}{ch}")
+                    relax(i, j + 1, cur, DOUBLE_CONSONANT_COST, 1, i, j, f"{ch} vs. {ch}{ch}")
             for s, t, c in RULES:                                  # multi-char
                 if a.startswith(s, i) and b.startswith(t, j):
-                    relax(i + len(s), j + len(t), cur, c, 1, i, j, f"{s}->{t}")
+                    relax(i + len(s), j + len(t), cur, c, 1, i, j, f"{s} vs. {t}")
 
     end = dp[n][m]
     if end == _INF:
