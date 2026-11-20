@@ -108,7 +108,7 @@ for _s, _t, _c in _RULES:
 # y<->w swap) changes the word: gawan != gayan.  Only the glide spellings in RULES
 # (uw/w, ow/w, iy/y, ey/y) are accepted, e.g. kuwento / kwento.
 INDEL_COSTS = {"h": 75, "-": 50, "'": 50, "’": 50}
-DOUBLE_CONSONANT_COST = 125      # tt <-> t (only acceptable as the sole edit)
+DOUBLE_CONSONANT_COST = 200      # tt <-> t (only acceptable as the sole edit)
 FORBIDDEN = 200                  # any non-attested edit (exceeds every threshold)
 
 # --------------------------------------------------------------------------- #
