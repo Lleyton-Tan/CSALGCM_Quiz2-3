@@ -406,18 +406,18 @@ def main():
             ap.error(f"dictionary file not found: {args.dictionary} "
                      f"(use -d PATH, or --no-dictionary)")
         dictionary = load_dictionary(args.dictionary)
-        print(f"[0/3] Loaded dictionary: {len(dictionary):,} valid words", file=sys.stderr)
+        print(f"[0/3] Loaded dictionary: {len(dictionary):,} valid words", file=sys.stderr)     # Get rid of this
     print(f"[1/3] Counting + dictionary-filtering words in {args.input} "
-          f"({size_mb:,.1f} MB) ...", file=sys.stderr)
+          f"({size_mb:,.1f} MB) ...", file=sys.stderr)                                          # Get rid of this
     counts, seen, kept = count_words(args.input, args.chunk_mb * 1_000_000,
                                      args.workers, args.encoding, dictionary)
     pct = 100.0 * kept / seen if seen else 0.0
     print(f"      {seen:,} tokens read; {kept:,} kept ({pct:.1f}%), "
           f"{seen - kept:,} discarded as not in dictionary; "
           f"{len(counts):,} distinct valid words ({time.time() - t0:.1f}s)",
-          file=sys.stderr)
+          file=sys.stderr)                                                                      # Get rid of this
 
-    print("[2/3] Finding spelling variants ...", file=sys.stderr)
+    print("[2/3] Finding spelling variants ...", file=sys.stderr)                               # Get rid of this
     rows = list(find_variants(counts, args.min_len, int(round(args.max_cost * 100)),
                               args.max_ops, args.max_ratio, args.min_count))
     rows.sort(key=lambda r: (-(r[2] + r[3]), r[0], r[1]))
